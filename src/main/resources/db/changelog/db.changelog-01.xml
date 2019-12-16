@@ -1,0 +1,24 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="danilaveremcuk" id="01-1">
+        <createTable tableName="customer_information">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="age" type="INT"/>
+            <column name="salary" type="FLOAT4"/>
+            <column name="real_estate" type="INT"/>
+            <column name="debt" type="FLOAT4"/>
+            <column name="elec" type="FLOAT4"/>
+            <column name="gas" type="FLOAT4"/>
+            <column name="reliability" type="FLOAT4"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

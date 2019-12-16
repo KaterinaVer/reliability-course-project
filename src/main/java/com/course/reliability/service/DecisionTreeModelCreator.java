@@ -116,7 +116,7 @@ public class DecisionTreeModelCreator {
         LOG.info("Test Error: " + testErr);
         LOG.info("Learned classification tree model:\n" + model.toDebugString());
 
-        model.save(jsc.sc(), "target/tmp/myDecisionTreeClassificationModel");
+        model.save(jsc.sc(), "model/tmp/myDecisionTreeClassificationModel");
     }
 
     protected StructType buildSchema() {

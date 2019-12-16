@@ -2,10 +2,10 @@ package com.course.reliability;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-@SpringBootApplication(scanBasePackages= "com.course.reliability")
-public class ReliabilityApplication extends SpringBootServletInitializer {
+@SpringBootApplication
+public class ReliabilityApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ReliabilityApplication.class, args);

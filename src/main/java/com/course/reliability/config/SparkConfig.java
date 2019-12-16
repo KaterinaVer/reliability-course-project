@@ -23,6 +23,6 @@ public class SparkConfig {
     @Bean
     public DecisionTreeModel decisionTreeModel(final JavaSparkContext sparkContext){
         return DecisionTreeModel
-                .load(sparkContext.sc(), "target/tmp/myDecisionTreeClassificationModel");
+                .load(sparkContext.sc(), "model/tmp/myDecisionTreeClassificationModel");
     }
 }

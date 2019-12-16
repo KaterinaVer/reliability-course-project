@@ -2,7 +2,6 @@ package com.course.reliability.dao;
 
 import com.course.reliability.model.CustomerInformation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -27,19 +26,6 @@ public class CustomerInformationDao {
     private static final String GAS = "gas";
     private static final String RELIABILITY = "reliability";
 
-    @Value("${findAll}")
-    private String findAllSql;
-    @Value("${getCustomerInformationById}")
-    private String getCustomerInformationByIdSql;
-    @Value("${addCustomerInformation}")
-    private String addCustomerInformationSql;
-    @Value("${updateCustomerReliability}")
-    private String updateCustomerReliabilitySql;
-    @Value("${updateCustomerInformation}")
-    private String updateCustomerInformationSql;
-    @Value("${deleteCustomerInformation}")
-    private String deleteCustomerInformationSql;
-
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
@@ -59,11 +45,13 @@ public class CustomerInformationDao {
     );
 
     public List<CustomerInformation> findAll() throws DataAccessException{
+        String findAllSql = "select * from customer_information";
         return namedParameterJdbcTemplate.query(findAllSql, customerInformationRowMapper);
 
     }
 
     public CustomerInformation getCustomerInformationById(final Integer id) throws DataAccessException {
+        String getCustomerInformationByIdSql = "select * from customer_information where id=:id";
         return namedParameterJdbcTemplate
                 .queryForObject(getCustomerInformationByIdSql, new MapSqlParameterSource(ID, id), customerInformationRowMapper);
     }
@@ -79,6 +67,7 @@ public class CustomerInformationDao {
         namedParameters.addValue(ELEC, customerInformation.getElec());
         namedParameters.addValue(GAS, customerInformation.getGas());
 
+        String addCustomerInformationSql = "insert into customer_information(age,salary,real_estate,debt,elec,gas) values(:age,:salary,:realEstate,:debt,:elec,:gas)";
         namedParameterJdbcTemplate
                 .update(addCustomerInformationSql, namedParameters, keyHolder,new String[]{"id"});
 
@@ -91,6 +80,7 @@ public class CustomerInformationDao {
         namedParameters.addValue(RELIABILITY, reliability);
         namedParameters.addValue(ID, id);
 
+        String updateCustomerReliabilitySql = "update customer_information set reliability=:reliability where id=:id";
         namedParameterJdbcTemplate.update(updateCustomerReliabilitySql, namedParameters);
     }
 
@@ -106,10 +96,12 @@ public class CustomerInformationDao {
         namedParameters.addValue(GAS, customerInformation.getGas());
         namedParameters.addValue(RELIABILITY, reliability);
 
+        String updateCustomerInformationSql = "update customer_information set age=:age, salary=:salary, real_estate=:realEstate, debt=:debt, elec=:elec, gas=:gas, reliability=:reliability where id=:id";
         namedParameterJdbcTemplate.update(updateCustomerInformationSql, namedParameters);
     }
 
     public Integer deleteCustomerInformation(Integer id) throws DataAccessException {
+        String deleteCustomerInformationSql = "delete from customer_information where id=:id";
         return namedParameterJdbcTemplate
                 .update(deleteCustomerInformationSql, new MapSqlParameterSource(ID,id));
     }

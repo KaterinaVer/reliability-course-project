@@ -1,29 +1,21 @@
 package com.course.reliability.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource(value = "classpath:application.properties")
+@EnableWebMvc
 public class DaoConfig {
-    @Value("${driver}")
-    String driver;
-
-    @Value("${url}")
-    String url;
-
-    @Value("${username}")
-    String username;
-
-    @Value("${password}")
-    String password;
+    String driver="org.postgresql.Driver";
+    String url="jdbc:postgresql://localhost:5432/customer";
+    String username="user";
+    String password="password";
 
     @Bean
     public DataSource dataSource() {

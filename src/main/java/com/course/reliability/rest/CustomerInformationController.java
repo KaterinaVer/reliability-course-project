@@ -24,19 +24,16 @@ public class CustomerInformationController {
     }
 
     @GetMapping("/")
-    @ResponseStatus(HttpStatus.OK)
     public List<CustomerInformation> getAllCustomers() {
         return customerInformationService.getCustomers();
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public CustomerInformation getCustomerInformation(@PathVariable("id") Integer id) {
         return customerInformationService.getCustomerInformationById(id);
     }
 
     @PostMapping("/")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> createCustomerInformation(@Valid @RequestBody CustomerInformation customerInformation, UriComponentsBuilder ucBuilder) {
         Integer id = customerInformationService.addCustomerInformation(customerInformation);
 
@@ -45,7 +42,6 @@ public class CustomerInformationController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
     public void updateCustomerInformation(@PathVariable("id") Integer id, @Valid @RequestBody  CustomerInformation customerInformation) {
         customerInformation.setId(id);
 
@@ -53,7 +49,6 @@ public class CustomerInformationController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public void deleteCustomerInformation(@PathVariable("id") Integer id) {
         customerInformationService.deleteCustomerInformation(id);
     }

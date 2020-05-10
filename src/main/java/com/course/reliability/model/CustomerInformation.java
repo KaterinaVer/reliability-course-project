@@ -1,6 +1,19 @@
 package com.course.reliability.model;
 
+import lombok.*;
+
+import javax.persistence.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Entity
 public class CustomerInformation {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="customer_information_id_seq")
+    @SequenceGenerator(name="customer_information_id_seq", sequenceName="customer_information_id_seq", allocationSize=1)
     private Integer id;
     private Integer age;
     private Double salary;
@@ -9,82 +22,8 @@ public class CustomerInformation {
     private Double elec;
     private Double gas;
     private Double reliability;
+    private String name;
+    private String address;
+    private String phone_number;
 
-    public CustomerInformation() {
-    }
-
-    public CustomerInformation(Integer id, Integer age, Double salary, Integer realEstate, Double debt, Double elec, Double gas, Double reliability) {
-        this.id = id;
-        this.age = age;
-        this.salary = salary;
-        this.realEstate = realEstate;
-        this.debt = debt;
-        this.elec = elec;
-        this.gas = gas;
-        this.reliability = reliability;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public Double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(Double salary) {
-        this.salary = salary;
-    }
-
-    public Integer getRealEstate() {
-        return realEstate;
-    }
-
-    public void setRealEstate(Integer realEstate) {
-        this.realEstate = realEstate;
-    }
-
-    public Double getDebt() {
-        return debt;
-    }
-
-    public void setDebt(Double debt) {
-        this.debt = debt;
-    }
-
-    public Double getElec() {
-        return elec;
-    }
-
-    public void setElec(Double elec) {
-        this.elec = elec;
-    }
-
-    public Double getGas() {
-        return gas;
-    }
-
-    public void setGas(Double gas) {
-        this.gas = gas;
-    }
-
-    public Double getReliability() {
-        return reliability;
-    }
-
-    public void setReliability(Double reliability) {
-        this.reliability = reliability;
-    }
 }

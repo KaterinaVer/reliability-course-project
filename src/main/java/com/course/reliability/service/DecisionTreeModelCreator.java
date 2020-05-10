@@ -25,7 +25,7 @@ import static org.apache.spark.sql.functions.col;
 
 public class DecisionTreeModelCreator {
     private final static Logger LOG = LoggerFactory.getLogger(DecisionTreeModelCreator.class);
-    private final static String FILE_DATA = "customer_information.csv";
+    private final static String FILE_DATA = "customer_information_test.csv";
 
     public static void main(String[] args) {
         DecisionTreeModelCreator testDecisionTree = new DecisionTreeModelCreator();
@@ -58,7 +58,7 @@ public class DecisionTreeModelCreator {
 
         // Decision Tree algo
         // Split data 70% and 30%
-        Dataset<Row>[] datas = datasetCredit.randomSplit(new double[] {0.7, 0.3});
+        Dataset<Row>[] datas = datasetCredit.randomSplit(new double[] {0.8, 0.2});
 
         // separate dataset
         JavaRDD<Row> train = datas[0].toJavaRDD();
@@ -98,7 +98,7 @@ public class DecisionTreeModelCreator {
         String impurity = "gini";
         int maxDepth = 6;
         int maxBins = 20;
-        int numClass = 2;
+        int numClass = 11;
 
         // Find a model ...
         final DecisionTreeModel model = DecisionTree.trainClassifier(trainLabeledPoints, numClass, categoricalFeaturesInfo, impurity, maxDepth, maxBins);

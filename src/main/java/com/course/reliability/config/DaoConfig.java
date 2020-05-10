@@ -28,9 +28,4 @@ public class DaoConfig {
         return dataSource;
     }
 
-    @Bean
-    public PlatformTransactionManager txManager() {
-        return new DataSourceTransactionManager(dataSource());
-    }
-
 }

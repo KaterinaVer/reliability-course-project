@@ -3,6 +3,8 @@ package com.course.reliability.rest;
 import com.course.reliability.model.CustomerInformation;
 import com.course.reliability.service.CustomerInformationService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +12,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.ws.rs.Path;
+import java.awt.print.Book;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 //@RequestMapping("/customer-information")
@@ -19,11 +26,26 @@ import java.util.Optional;
 public class CustomerInformationController {
     private final CustomerInformationService customerInformationService;
 
-    @RequestMapping
-    public String getAllCustomers(final Model model) {
-        Iterable<CustomerInformation> customers = customerInformationService.getCustomers();
+    @RequestMapping("/customers")
+    public String getAllCustomers(final Model model, @RequestParam("page") Optional<Integer> page,
+                                  @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
 
-        model.addAttribute("customers", customers);
+        Page<CustomerInformation> customerInformationPage =
+                customerInformationService.getCustomers(PageRequest.of(currentPage - 1, pageSize));
+
+        model.addAttribute("customerPage", customerInformationPage);
+
+        int totalPages = customerInformationPage.getTotalPages();
+
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
         return "list-customers";
     }
 

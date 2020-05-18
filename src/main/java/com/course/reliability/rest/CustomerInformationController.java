@@ -30,7 +30,7 @@ public class CustomerInformationController {
     public String getAllCustomers(final Model model, @RequestParam("page") Optional<Integer> page,
                                   @RequestParam("size") Optional<Integer> size) {
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(15);
 
         Page<CustomerInformation> customerInformationPage =
                 customerInformationService.getCustomers(PageRequest.of(currentPage - 1, pageSize));

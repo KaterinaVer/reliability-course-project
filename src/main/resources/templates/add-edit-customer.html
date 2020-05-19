@@ -63,9 +63,19 @@
                                 <input type="text" th:field="*{gas}" class="form-control"
                                             id="Gas" placeholder="Gas" />
                             </div>
+                            <div class="form-group col-md-8">
+                                <label for="reliability" class="col-form-label">Reliability</label>
+                                <input type="text" th:field="*{reliability}" class="form-control"
+                                       id="Reliability" placeholder="Null" />
+                            </div>
 
                             <div class="col-md-6">
                                 <input type="submit" class="btn btn-primary" value=" Submit ">
+                            </div>
+
+                            <div class="col-md-6">
+                                <a href="/customers" class="btn btn-primary">
+                                    Return</a>
                             </div>
 
                             <input type="hidden" id="id" th:field="*{id}">

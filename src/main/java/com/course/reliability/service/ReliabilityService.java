@@ -3,7 +3,6 @@ package com.course.reliability.service;
 import com.course.reliability.model.CustomerInformation;
 import org.apache.spark.mllib.linalg.Vectors;
 import org.apache.spark.mllib.tree.model.DecisionTreeModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

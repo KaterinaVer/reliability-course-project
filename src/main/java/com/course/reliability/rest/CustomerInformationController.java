@@ -5,23 +5,17 @@ import com.course.reliability.service.CustomerInformationService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-import javax.ws.rs.Path;
-import java.awt.print.Book;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
-//@RequestMapping("/customer-information")
 @AllArgsConstructor
 public class CustomerInformationController {
     private final CustomerInformationService customerInformationService;
@@ -55,9 +49,14 @@ public class CustomerInformationController {
     }
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
-    public String createCustomerInformation(CustomerInformation customerInformation) {
-        customerInformationService.addCustomerInformation(customerInformation);
-        return "redirect:/";
+    public ModelAndView createCustomerInformation(CustomerInformation customerInformation) {
+        CustomerInformation customerInformation1 = customerInformationService.addCustomerInformation(customerInformation);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("customer", customerInformation1);
+        modelAndView.setViewName("add-edit-customer");
+
+        return modelAndView;
     }
 
     @RequestMapping(path = {"/edit", "/edit/{id}"})
@@ -73,8 +72,10 @@ public class CustomerInformationController {
     }
 
     @RequestMapping("/delete/{id}")
-    public void deleteCustomerInformation(@PathVariable("id") Integer id) {
+    public String deleteCustomerInformation(@PathVariable("id") Integer id) {
         customerInformationService.deleteCustomerInformation(id);
+
+        return "redirect:/customers";
     }
 
 }
